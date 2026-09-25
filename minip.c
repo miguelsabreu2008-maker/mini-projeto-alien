@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-
+void inverter(char *str);
 
 
 
@@ -19,4 +19,21 @@ int main() {
     printf("%ls", n);
 
     return 0;
+}
+
+
+
+void inverter(char *str) {
+    int i, j;
+    char temp;
+
+    scanf("%s", str);
+
+    for(i = 0, j = i + 1; i < j; i++, j--) {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+    }
+
+    printf("%s", str);
 }
