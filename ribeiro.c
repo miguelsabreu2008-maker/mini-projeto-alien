@@ -9,7 +9,7 @@ void inverter(char *str);
 
 int main() {
     char str[10001];
-    read(*str);
+    read(char *str);
 
     printf("%s\n", str);
 

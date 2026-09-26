@@ -1,24 +1,30 @@
 #include <stdio.h>
 
-//Lê a string
 int tamanhostr(char*str); //calcula o tamanho da string
-void read(char *str); 
 void inverter(char *str);
+void deslocar(char *str, int n);
+
+
+int main() {
+    char str[10001];
+
+    scanf("%s", str);
+    inverter(str);
+    deslocar(str, n);
+
+    printf("%s\n", str);
+
+    return 0;
+}
 
 int tamanhostr(char*str) {
     int tam = 0;
-    while(str[tam] != 0){
+    while(str[tam] != '\0'){
         tam++;
     }
     return tam;
 }
 
-void read(char *str){ //eu acho que essa função é meio desnecessária, pq o %s já lẽ a string até o /0, eu tinha esquecido disso
-    int i;
-    for(i = 0; str[i] == '\0'; i++) {
-        scanf("%s", &str[i]);
-    }
-}
 
 void inverter(char *str) {
     int tam = tamanhostr(str);
@@ -32,16 +38,19 @@ void inverter(char *str) {
 
 }
 
-int main() {
-    char str[10001];
+void deslocar(char *str, int n) {
+    int i;
+    scanf("%d", &n);
+    n = n % 26;
 
-    read(str);
+    for(i=0; str[i] != '\0'; i++) {
+        if(str[i] >= 'a' && str[i] <= 'z') {
+            str[i] = ((str[i] - 'a' + n) % 26) + 'a';
+        } else if(str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = ((str[i] - 'A' + n) % 26) + 'A';
+        } else if(str[i] >= '0' && str[i] <= '9') {
+            str[i] = ((str[i] - '0' + n) % 10) + '0';
+        }
+    }
 
-    inverter(str);
-
-    printf("%s\n", str);
-
-    return 0;
 }
-
-
