@@ -14,7 +14,7 @@ int main() {
     char str[10001];
     int operacao, n;
 
-    scanf(" %s", str);
+    scanf("%[^\n]", str);
     tamanhostr(str);
 
     while(1){
@@ -66,15 +66,18 @@ void inverter(char *str) {
 
 void deslocar(char *str, int n) {
     int i;
-    n = n % 26;
+    int trocar;
 
-    for(i=0; str[i] != '\0'; i++) {
+   for(i = 0; str[i] != '\0'; i++) {
         if(str[i] >= 'a' && str[i] <= 'z') {
-            str[i] = ((str[i] - 'a' + n) % 26) + 'a';
+            int trocar = ((n % 26) + 26) % 26; 
+            str[i] = ((str[i] - 'a' + trocar) % 26) + 'a';
         } else if(str[i] >= 'A' && str[i] <= 'Z') {
-            str[i] = ((str[i] - 'A' + n) % 26) + 'A';
+            int trocar = ((n % 26) + 26) % 26;
+            str[i] = ((str[i] - 'A' + trocar) % 26) + 'A';
         } else if(str[i] >= '0' && str[i] <= '9') {
-            str[i] = ((str[i] - '0' + n) % 10) + '0';
+            int trocar = ((n % 10) + 10) % 10; 
+            str[i] = ((str[i] - '0' + trocar) % 10) + '0';
         }
     }
 }
