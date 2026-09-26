@@ -1,24 +1,44 @@
+#include <stdio.h>
+
 int tamanhostr(char *str); //calcula o tamanho da string
 void inverter(char *str);
-void deslocar(char *str, int n)
+void deslocar(char *str, int n);
+void trocarParesImpares(char *str);
 void inverterCaixa(char *str); //transforma maiúsculo em minúsculo e vice versa
+void rotacionar(char *str, int n); //fazer scanf na função main e apagar na função void
 void trocarMetades(char *s);
 
 
 
 int main() {
     char str[10001];
+    int operacao, n;
 
-    scanf("%s", str);
+    scanf(" %s", str);
+    tamanhostr(str);
 
-    inverter(str);
-    deslocar(str, n);
-    inverterCaixa(str);
-    trocarMetades(str);
+    while(1){
+        scanf("%d", &operacao);
+        if(operacao == 1){
+            inverter(str);
+        } else if(operacao == 2){
+            scanf("%d", &n);
+            deslocar(str, n);
+        } else if(operacao == 3){
+            trocarParesImpares(str);
+        } else if(operacao == 4){
+            inverterCaixa(str);
+        } else if(operacao == 5){
+            scanf("%d", &n);
+            rotacionar(str, n);
+        } else if(operacao == 6){
+        trocarMetades(str);
+        } else if(operacao == 0 || operacao < 0 || operacao > 6) break;
+    }
     printf("%s\n", str);
 
     return 0;
-}
+}   
 
 
 
@@ -35,18 +55,17 @@ int tamanhostr(char*str) {
 void inverter(char *str) {
     int tam = tamanhostr(str);
     int i;
-    char temp;
+    char stringTemporaria;
     for(i = 0; i<tam/ 2; i++) {
-        temp = str[i];
+        stringTemporaria = str[i];
         str[i] = str[tam - 1 - i];
-        str[tam - 1 - i] = temp;
+        str[tam - 1 - i] = stringTemporaria;
     }
 
 }
 
 void deslocar(char *str, int n) {
     int i;
-    scanf("%d", &n);
     n = n % 26;
 
     for(i=0; str[i] != '\0'; i++) {
@@ -60,6 +79,21 @@ void deslocar(char *str, int n) {
     }
 }
 
+void trocarParesImpares(char *str){
+    char stringTemporaria;
+    int i;
+    for(i=0; str[i] != '\0' && str[i+1] != '\0'; i+=2){
+        stringTemporaria = str[i];
+        str[i] = str[i+1];
+        str[i+1] = stringTemporaria;
+    }
+
+
+
+
+}
+
+
 void inverterCaixa(char* str) { //usei a tabela ascii :P
     int i;
     for(i = 0; str[i] != '\0'; i++) {
@@ -71,14 +105,52 @@ void inverterCaixa(char* str) { //usei a tabela ascii :P
     }
 }
 
+
+void rotacionar(char *str, int n) {
+
+    int tam = tamanhostr(str);
+    int i;
+    char stringTemporaria[10001];
+
+    if (tam == 0) {
+        return;
+    }
+
+    if (n > 0) {
+
+        n = n % tam;
+
+        for (i = 0; i < tam; i++) {
+            stringTemporaria[(i + n) % tam] = str[i];
+        }
+
+    } else if (n < 0) {
+
+        n = (-n) % tam;
+
+        for (i = 0; i < tam; i++) {
+            stringTemporaria[(i - n + tam) % tam] = str[i];
+        }
+
+    } else {
+        return;
+    }
+
+    stringTemporaria[tam] = '\0';
+
+    for (i = 0; i < tam; i++) {
+        str[i] = stringTemporaria[i];
+    }
+}
+
 void trocarMetades(char *str) {
     int i;
     int metade = tamanhostr(str)/2; 
     int meio = metade + tamanhostr(str)%2; //pula o caractere do meio se tiver
-    char temp;
+    char stringTemporaria;
     for(i = 0; i < metade; i++) {
-        temp = str[i];
+        stringTemporaria = str[i];
         str[i] = str[i + meio];
-        str[i + meio] = temp;
+        str[i + meio] = stringTemporaria;
     }
 }
