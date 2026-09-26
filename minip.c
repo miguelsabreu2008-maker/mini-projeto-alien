@@ -20,7 +20,7 @@ int main() {
     return 0;
 }
 
-void read(char *str); 
+
 
 int tamanhostr(char*str) {
     int tam = 0;
@@ -30,12 +30,7 @@ int tamanhostr(char*str) {
     return tam;
 }
 
-void read(char *str){ //eu acho que essa função é meio desnecessária, pq o %s já lẽ a string até o /0, eu tinha esquecido disso
-    int i;
-    for(i = 0; str[i] == '\0'; i++) {
-        scanf("%s", &str[i]);
-    }
-}
+
 
 void inverter(char *str) {
     int tam = tamanhostr(str);
