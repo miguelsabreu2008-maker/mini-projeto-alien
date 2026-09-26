@@ -1,39 +1,47 @@
 #include <stdio.h>
 
+//Lê a string
+int tamanhostr(char*str); //calcula o tamanho da string
+void read(char *str); 
 void inverter(char *str);
 
+int tamanhostr(char*str) {
+    int tam = 0;
+    while(str[tam] != 0){
+        tam++;
+    }
+    return tam;
+}
 
+void read(char *str){ //eu acho que essa função é meio desnecessária, pq o %s já lẽ a string até o /0, eu tinha esquecido disso
+    int i;
+    for(i = 0; str[i] == '\0'; i++) {
+        scanf("%s", &str[i]);
+    }
+}
+
+void inverter(char *str) {
+    int tam = tamanhostr(str);
+    int i;
+    char temp;
+    for(i = 0; i<tam/ 2; i++) {
+        temp = str[i];
+        str[i] = str[tam - 1 - i];
+        str[tam - 1 - i] = temp;
+    }
+
+}
 
 int main() {
     char str[10001];
-    int n[20];
 
-    scanf("%s", str);
+    read(str);
 
-    while(1) {
-        scanf("%d", n);
-        if(n == 0 ) {
-            break;
-        }
-    }
-    printf("%ls", n);
+    inverter(str);
+
+    printf("%s\n", str);
 
     return 0;
 }
 
 
-
-void inverter(char *str) {
-    int i, j;
-    char temp;
-
-    scanf("%s", str);
-
-    for(i = 0, j = i + 1; i < j; i++, j--) {
-        temp = str[i];
-        str[i] = str[j];
-        str[j] = temp;
-    }
-
-    printf("%s", str);
-}
