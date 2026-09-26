@@ -1,9 +1,26 @@
 int tamanhostr(char *str); //calcula o tamanho da string
-void read(char *str); 
 void inverter(char *str);
+void deslocar(char *str, int n)
 void inverterCaixa(char *str); //transforma maiúsculo em minúsculo e vice versa
 void trocarMetades(char *s);
 
+
+
+int main() {
+    char str[10001];
+
+    scanf("%s", str);
+
+    inverter(str);
+    deslocar(str, n);
+    inverterCaixa(str);
+    trocarMetades(str);
+    printf("%s\n", str);
+
+    return 0;
+}
+
+void read(char *str); 
 
 int tamanhostr(char*str) {
     int tam = 0;
@@ -32,6 +49,22 @@ void inverter(char *str) {
 
 }
 
+void deslocar(char *str, int n) {
+    int i;
+    scanf("%d", &n);
+    n = n % 26;
+
+    for(i=0; str[i] != '\0'; i++) {
+        if(str[i] >= 'a' && str[i] <= 'z') {
+            str[i] = ((str[i] - 'a' + n) % 26) + 'a';
+        } else if(str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = ((str[i] - 'A' + n) % 26) + 'A';
+        } else if(str[i] >= '0' && str[i] <= '9') {
+            str[i] = ((str[i] - '0' + n) % 10) + '0';
+        }
+    }
+}
+
 void inverterCaixa(char* str) { //usei a tabela ascii :P
     int i;
     for(i = 0; str[i] != '\0'; i++) {
@@ -53,20 +86,4 @@ void trocarMetades(char *str) {
         str[i] = str[i + meio];
         str[i + meio] = temp;
     }
-}
-
-int main() {
-    char str[10001];
-
-    read(str);
-
-    //inverter(str);
-
-    //inverterCaixa(str);
-
-    trocarMetades(str);
-
-    printf("%s\n", str);
-
-    return 0;
 }
