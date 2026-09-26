@@ -37,3 +37,22 @@ void inverter(char *str) {
 
     printf("%s\n", str);
 }
+
+
+
+void deslocar(char *str, int n) {
+    int i;
+    scanf("%d", &n);
+    n = n % 26;
+
+    for(i=0; str[i] != '\0'; i++) {
+        if(str[i] >= 'a' && str[i] <= 'z') {
+            str[i] = ((str[i] - 'a' + n) % 26) + 'a';
+        } else if(str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = ((str[i] - 'A' + n) % 26) + 'A';
+        } else if(str[i] >= '0' && str[i] <= '9') {
+            str[i] = ((str[i] - '0' + n) % 10) + '0';
+        }
+    }
+
+}
